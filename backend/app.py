@@ -1,33 +1,42 @@
 from flask import Flask, jsonify
 from flask_cors import CORS
+from flask_sqlalchemy import SQLAlchemy
 import logging
+from models import db, Flashcard  # Import database and model
 
 app = Flask(__name__)
 
-# Allow CORS for all origins (for debugging)
-CORS(app)
+# Configure SQLite database (use PostgreSQL for production)
+app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///flashcards.db'  # SQLite file
+app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False  # Disable modification tracking
+
+db.init_app(app)  # Initialize the database
+
+# Allow CORS from localhost:5173 (React app)
+CORS(app, resources={r"/api/*": {"origins": "http://localhost:5173"}})
 
 # Logging setup
 logging.basicConfig(level=logging.DEBUG)
 
-flashcards = [
-    {"id": 1, "category": "Finance", "title": "What is SMA?", "description": "Simple Moving Average", "mastered": False},
-    {"id": 2, "category": "Programming", "title": "Define React", "description": "A JavaScript library for building user interfaces", "mastered": False}
-]
-
 @app.route('/api/flashcards', methods=['GET'])
 def get_flashcards():
     app.logger.info('Flashcards route accessed')
-    response = jsonify(flashcards)
-    
-    # Add CORS headers manually
-    response.headers.add('Access-Control-Allow-Origin', '*')
-    response.headers.add('Access-Control-Allow-Headers', 'Content-Type,Authorization')
-    response.headers.add('Access-Control-Allow-Methods', 'GET,POST,OPTIONS')
+    flashcards = Flashcard.query.all()  # Query all flashcards from the database
+    return jsonify([{
+        'id': card.id,
+        'category': card.category,
+        'title': card.title,
+        'description': card.description,
+        'mastered': card.mastered
+    } for card in flashcards])
 
-    return response
+@app.route('/api/flashcards', methods=['POST'])
+def create_flashcard():
+    # Here you would handle the logic for creating a new flashcard
+    pass
 
 if __name__ == '__main__':
     app.logger.info('Starting Flask server...')
     app.run(debug=True, port=5000)
+
 
