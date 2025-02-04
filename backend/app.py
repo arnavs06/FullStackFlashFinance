@@ -46,3 +46,5 @@ def after_request(response):
 if __name__ == '__main__':
     app.logger.info('Starting Flask server...')
     app.run(debug=True, port=5000)
+
+#test
