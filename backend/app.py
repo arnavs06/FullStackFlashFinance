@@ -1,11 +1,11 @@
-from flask import Flask, jsonify, request
+from flask import Flask, jsonify
 from flask_cors import CORS
 import logging
 
 app = Flask(__name__)
 
-# Proper CORS handling
-CORS(app, resources={r"/api/*": {"origins": ["http://localhost:3000"]}})
+# Allow CORS from localhost:5173 (where React runs)
+CORS(app, resources={r"/api/*": {"origins": "http://localhost:5173"}})
 
 # Logging setup
 logging.basicConfig(level=logging.DEBUG)
@@ -19,13 +19,6 @@ flashcards = [
 def get_flashcards():
     app.logger.info('Flashcards route accessed')
     return jsonify(flashcards)
-
-@app.after_request
-def after_request(response):
-    response.headers.add('Access-Control-Allow-Origin', '*')
-    response.headers.add('Access-Control-Allow-Headers', 'Content-Type, Authorization')
-    response.headers.add('Access-Control-Allow-Methods', 'GET, POST, PUT, DELETE, OPTIONS')
-    return response
 
 if __name__ == '__main__':
     app.logger.info('Starting Flask server...')
