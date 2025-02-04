@@ -1,0 +1,309 @@
+@import url('https://fonts.googleapis.com/css2?family=Satoshi:wght@400;700&display=swap');
+
+body {
+  font-family: 'Satoshi', sans-serif;
+  margin: 0;
+  padding: 0;
+  color: rgb(0, 51, 81);
+  opacity: 0;
+  animation: fadeIn 0.5s forwards;
+}
+
+@keyframes fadeIn {
+  0% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
+  }
+}
+
+header {
+  background-color: rgb(0, 51, 81);
+  color: white;
+  padding: 1rem 2rem;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  position: fixed; 
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 1000;
+  transition: top 0.3s; 
+  border: 4px solid rgba(204, 162, 75); 
+  border-radius: 8px;
+}
+
+header .logo {
+  font-family: 'Satoshi', sans-serif;
+  font-size: 1.5rem;
+  font-weight: bold;
+}
+
+nav ul {
+  list-style: none;
+  display: flex;
+  margin: 0;
+  padding: 0;
+}
+
+nav ul li {
+  margin-left: 20px;
+  position: relative;
+}
+
+nav ul li a {
+  color: white;
+  text-decoration: none;
+  font-weight: bold;
+  padding: 0.5rem 0;
+}
+
+nav ul li:hover > a {
+  text-decoration: underline;
+}
+
+nav ul li ul {
+  display: none;
+  position: absolute;
+  background-color: white;
+  color: rgb(0, 51, 81);
+  top: 2rem;
+  left: 0;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+  z-index: 1000;
+}
+
+nav ul li:hover ul {
+  display: block;
+}
+
+nav ul li ul li {
+  padding: 0.5rem 1rem;
+  white-space: nowrap;
+}
+
+nav ul li ul li a {
+  color: rgb(0, 51, 81);
+  text-decoration: none;
+}
+
+nav ul li ul li a:hover {
+  text-decoration: underline;
+}
+
+.hero {
+  font-family: 'Satoshi', sans-serif;
+  background-color: white;
+  color: rgb(0, 51, 81);
+  text-align: left;
+  padding: 8rem 2rem; 
+  animation: fadeIn 1s forwards;
+  position: relative;
+  z-index: 2;
+  margin-top: 50px; 
+  margin-left: auto; 
+  margin-right: auto; 
+  width: 80%; 
+  min-height: 40vh;
+}
+
+.hero h1 {
+  font-size: 4rem;
+  font-family: 'Satoshi', sans-serif;
+}
+
+.hero p {
+  font-family: 'Satoshi', sans-serif;
+  font-size: 1.5rem;
+  margin-top: 1rem;
+}
+
+
+.new-job-postings {
+  background-color: rgb(0, 51, 81);
+  padding: 3rem 1rem;
+  text-align: center;
+  margin-top: 4rem;
+  border: 4px solid rgba(204, 162, 75);
+  border-radius: 8px;
+}
+
+.new-job-postings h2 {
+  font-size: 2rem;
+  color: white;
+  background-color: rgb(0, 51, 81);
+  font-family: 'Satoshi', sans-serif;
+}
+
+.job-card-container {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 2rem;
+  margin-top: 2rem;
+}
+
+.job-card {
+  background-color: white;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  padding: 2rem;
+  width: 350px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  transition: transform 0.3s ease-in-out, box-shadow 0.3s ease-in-out;
+  cursor: pointer;
+}
+
+.job-card h3 {
+  font-size: 1.5rem;
+  color: rgb(0, 51, 81);
+  margin-bottom: 1rem;
+  font-family: 'Satoshi', sans-serif;
+}
+
+.job-card p {
+  font-size: 1rem;
+  color: #555;
+  font-family: 'Satoshi', sans-serif;
+}
+
+.job-card:hover {
+  transform: translateY(-10px);
+  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+}
+
+.content {
+  padding: 2rem;
+  text-align: center;
+  animation: fadeIn 1s forwards;
+}
+
+.content h2 {
+  color: rgb(0, 51, 81);
+  font-family: 'Satoshi', sans-serif;
+}
+
+.content .card-container {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 1rem;
+}
+
+.card {
+  border: 1px solid #ddd;
+  border-radius: 4px;
+  padding: 1rem;
+  width: 250px;
+  background-color: white;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  opacity: 0;
+  animation: fadeInCard 1s forwards;
+  transition: transform 0.3s ease-in-out, box-shadow 0.3s ease-in-out;
+  cursor: pointer;
+}
+
+.card h3 {
+  color: rgb(0, 51, 81);
+  margin: 0;
+  font-size: 1.2rem;
+  font-family: 'Satoshi', sans-serif;
+}
+
+.card p {
+  font-size: 0.9rem;
+  color: #666;
+  margin: 0.5rem 0 0;
+  font-family: 'Satoshi', sans-serif;
+}
+
+.card:hover {
+  transform: translateY(-10px);
+  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+}
+
+@keyframes fadeInCard {
+  0% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
+  }
+}
+
+footer {
+  background-color: rgb(0, 51, 81);
+  color: white;
+  padding: 1rem;
+  text-align: center;
+  animation: fadeIn 1s forwards;
+  border: 4px solid rgba(204, 162, 75);
+  border-radius: 8px;
+  font-family: 'Satoshi', sans-serif;
+}
+
+.logo img {
+  max-width: 150px;
+  height: auto;
+}
+
+.flashcard-container {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  align-items: center;
+  margin-top: 100px;
+}
+
+.flashcard {
+  width: 300px;
+  height: 200px;
+  border: 2px solid #ccc;
+  border-radius: 10px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+}
+
+.flashcard-front {
+  background-color: white;
+  color: rgb(0, 51, 81);
+  padding: 20px;
+  font-size: 1.5rem;
+  text-align: center;
+  font-family: 'Satoshi', sans-serif;
+}
+
+.flashcard-back {
+  background-color: rgb(0, 51, 81);
+  color: white;
+  padding: 20px;
+  font-size: 1.5rem;
+  text-align: center;
+  font-family: 'Satoshi', sans-serif;
+}
+
+.flashcard-content {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 100%;
+  font-size: 2rem;
+  font-family: 'Satoshi', sans-serif;
+}
+
+.flashcard-content {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  font-size: 1.25rem;
+  font-family: 'Satoshi', sans-serif;
+}

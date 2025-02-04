@@ -1,0 +1,128 @@
+@import url('https://fonts.googleapis.com/css2?family=Satoshi:wght@400;700&display=swap');
+
+.question-card {
+  font-family: 'Satoshi', sans-serif;
+  width: 100%;
+  max-width: 800px; 
+  padding: 40px;
+  border: 2px solid rgba(204, 162, 75, 0.3); 
+  border-radius: 12px; 
+  background-color: #ffffff; 
+  box-shadow: 0 4px 18px rgba(0, 0, 0, 0.2); 
+  text-align: left; 
+  font-family: 'Satoshi', sans-serif; 
+  margin: 40px auto; 
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.question-card:hover {
+  transform: translateY(-8px); 
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.3); 
+}
+
+.question-title {
+  font-family: 'Satoshi', sans-serif;
+  font-size: 2rem; 
+  margin-bottom: 20px;
+  color: rgb(0, 51, 81);
+  font-weight: bold;
+}
+
+.question-text {
+  font-family: 'Satoshi', sans-serif;
+  font-size: 1.6rem;
+  margin-bottom: 40px;
+  color: rgb(60, 60, 60); 
+  line-height: 1.8; 
+  max-width: 85%; 
+}
+
+.answer-section {
+  font-family: 'Satoshi', sans-serif;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  align-items: center;
+}
+
+.answer-input {
+  width: 100%; 
+  padding: 16px;
+  border: 2px solid rgba(204, 162, 75);
+  border-radius: 8px;
+  font-size: 1.3rem; 
+  color: rgb(0, 51, 81); 
+  background-color: #f7f7f7; 
+  transition: border-color 0.3s ease; 
+}
+
+.answer-input:focus {
+  border-color:rgb(0, 51, 81);
+  outline: none; 
+}
+
+.submit-btn {
+  width: 100%; 
+  padding: 16px;
+  font-size: 1.3rem;
+  color: rgb(4, 59, 92); 
+  background-color: white;
+  border: 2px solid rgb(0, 51, 81); 
+  border-radius: 8px;
+  cursor: pointer;
+  transition: background-color 0.3s ease, transform 0.2s ease;
+}
+
+.submit-btn:hover {
+  background-color: rgb(0, 51, 81);
+  color: white; 
+  transform: scale(1.05); 
+}
+
+.submit-btn.disabled {
+  background-color: #ccc;
+  cursor: not-allowed;
+}
+
+.feedback {
+  margin-top: 30px;
+  font-size: 1.6rem;
+  font-weight: bold;
+}
+
+.feedback.correct {
+  color: #28a745; 
+}
+
+.feedback.incorrect {
+  color: #dc3545; 
+}
+
+.reset-btn {
+  margin-top: 30px;
+  padding: 16px 32px;
+  font-size: 1.3rem;
+  background-color: rgba(204, 162, 75); 
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: background-color 0.3s ease, transform 0.2s ease;
+}
+
+.reset-btn:hover {
+  background-color: rgba(179, 141, 62, 1); 
+  transform: scale(1.05); 
+}
+
+.prev-next-btn{
+  font-family: 'Satoshi', sans-serif;
+  background-color: rgb(0, 51, 81);
+  color: white;
+  padding: 0.8rem 1.5rem;
+  font-size: 1rem;
+  border: none;
+  border-radius: 4px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}

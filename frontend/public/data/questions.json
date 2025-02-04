@@ -1,0 +1,211 @@
+[
+  {
+    "question": "What is the net income if the following details are provided?",
+    "details": {
+      "Revenue": 500000,
+      "Cost of Goods Sold (COGS)": 300000,
+      "Operating Expenses": 100000,
+      "Interest Expense": 20000,
+      "Taxes": 30000
+    },
+    "correctAnswer": 50000
+  },
+  {
+    "question": "Calculate the net profit given the details below:",
+    "details": {
+      "Revenue": 600000,
+      "Cost of Goods Sold (COGS)": 350000,
+      "Operating Expenses": 120000,
+      "Interest Expense": 25000,
+      "Taxes": 40000
+    },
+    "correctAnswer": 65000
+  },
+  {
+    "question": "Determine the net income based on the following details:",
+    "details": {
+      "Revenue": 750000,
+      "Cost of Goods Sold (COGS)": 450000,
+      "Operating Expenses": 150000,
+      "Interest Expense": 30000,
+      "Taxes": 50000
+    },
+    "correctAnswer": 75000
+  },
+  {
+    "question": "Compute the net profit using the given financial data:",
+    "details": {
+      "Revenue": 900000,
+      "Cost of Goods Sold (COGS)": 500000,
+      "Operating Expenses": 180000,
+      "Interest Expense": 40000,
+      "Taxes": 70000
+    },
+    "correctAnswer": 110000
+  },
+  {
+    "question": "Find the net income for the following details:",
+    "details": {
+      "Revenue": 650000,
+      "Cost of Goods Sold (COGS)": 400000,
+      "Operating Expenses": 120000,
+      "Interest Expense": 20000,
+      "Taxes": 40000
+    },
+    "correctAnswer": 70000
+  },
+  {
+    "question": "Calculate the net profit based on the provided information:",
+    "details": {
+      "Revenue": 800000,
+      "Cost of Goods Sold (COGS)": 500000,
+      "Operating Expenses": 160000,
+      "Interest Expense": 35000,
+      "Taxes": 55000
+    },
+    "correctAnswer": 50000
+  },
+  {
+    "question": "What is the net income given these financial figures?",
+    "details": {
+      "Revenue": 720000,
+      "Cost of Goods Sold (COGS)": 420000,
+      "Operating Expenses": 140000,
+      "Interest Expense": 25000,
+      "Taxes": 45000
+    },
+    "correctAnswer": 90000
+  },
+  {
+    "question": "Compute the net profit from the data below:",
+    "details": {
+      "Revenue": 500000,
+      "Cost of Goods Sold (COGS)": 250000,
+      "Operating Expenses": 100000,
+      "Interest Expense": 15000,
+      "Taxes": 35000
+    },
+    "correctAnswer": 100000
+  },
+  {
+    "question": "Find the net income for the given financial details:",
+    "details": {
+      "Revenue": 950000,
+      "Cost of Goods Sold (COGS)": 600000,
+      "Operating Expenses": 200000,
+      "Interest Expense": 45000,
+      "Taxes": 65000
+    },
+    "correctAnswer": 45000
+  },
+  {
+    "question": "Determine the net income using the following data:",
+    "details": {
+      "Revenue": 870000,
+      "Cost of Goods Sold (COGS)": 480000,
+      "Operating Expenses": 170000,
+      "Interest Expense": 30000,
+      "Taxes": 60000
+    },
+    "correctAnswer": 130000
+  },
+  {
+    "question": "Calculate the net profit based on the details provided:",
+    "details": {
+      "Revenue": 700000,
+      "Cost of Goods Sold (COGS)": 420000,
+      "Operating Expenses": 130000,
+      "Interest Expense": 28000,
+      "Taxes": 50000
+    },
+    "correctAnswer": 72000
+  },
+  {
+    "question": "What is the net income given the financial figures below?",
+    "details": {
+      "Revenue": 620000,
+      "Cost of Goods Sold (COGS)": 350000,
+      "Operating Expenses": 110000,
+      "Interest Expense": 20000,
+      "Taxes": 40000
+    },
+    "correctAnswer": 100000
+  },
+  {
+    "question": "Compute the net profit using the data below:",
+    "details": {
+      "Revenue": 780000,
+      "Cost of Goods Sold (COGS)": 500000,
+      "Operating Expenses": 140000,
+      "Interest Expense": 25000,
+      "Taxes": 55000
+    },
+    "correctAnswer": 60000
+  },
+  {
+    "question": "Find the net income based on the provided financial data:",
+    "details": {
+      "Revenue": 830000,
+      "Cost of Goods Sold (COGS)": 490000,
+      "Operating Expenses": 160000,
+      "Interest Expense": 35000,
+      "Taxes": 50000
+    },
+    "correctAnswer": 96000
+  },
+  {
+    "question": "Determine the net profit for the following financial details:",
+    "details": {
+      "Revenue": 920000,
+      "Cost of Goods Sold (COGS)": 600000,
+      "Operating Expenses": 180000,
+      "Interest Expense": 40000,
+      "Taxes": 70000
+    },
+    "correctAnswer": 30000
+  },
+  {
+    "question": "Calculate the net income from the given information:",
+    "details": {
+      "Revenue": 680000,
+      "Cost of Goods Sold (COGS)": 400000,
+      "Operating Expenses": 130000,
+      "Interest Expense": 25000,
+      "Taxes": 45000
+    },
+    "correctAnswer": 80000
+  },
+  {
+    "question": "What is the net profit given the following details?",
+    "details": {
+      "Revenue": 750000,
+      "Cost of Goods Sold (COGS)": 460000,
+      "Operating Expenses": 150000,
+      "Interest Expense": 28000,
+      "Taxes": 50000
+    },
+    "correctAnswer": 62000
+  },
+  {
+    "question": "Compute the net income based on these financial details:",
+    "details": {
+      "Revenue": 570000,
+      "Cost of Goods Sold (COGS)": 320000,
+      "Operating Expenses": 100000,
+      "Interest Expense": 20000,
+      "Taxes": 40000
+    },
+    "correctAnswer": 90000
+  },
+  {
+    "question": "Find the net income using the provided data:",
+    "details": {
+      "Revenue": 980000,
+      "Cost of Goods Sold (COGS)": 600000,
+      "Operating Expenses": 220000,
+      "Interest Expense": 45000,
+      "Taxes": 75000
+    },
+    "correctAnswer": 40000
+  }
+]
