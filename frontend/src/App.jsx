@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
 import Navbar from './components/Navbar';
 import Flashcards from './pages/Flashcards';
@@ -8,20 +8,25 @@ import Footer from './components/Footer';
 import Login from './pages/Login';
 
 const App = () => {
+  const [flashcards, setFlashcards] = useState([]);
+
+  useEffect(() => {
+    fetch('http://localhost:5000/api/flashcards')
+      .then(response => response.json())
+      .then(data => setFlashcards(data))
+      .catch(error => console.error('Error fetching flashcards:', error));
+  }, []);
+
   return (
     <Router>
       <div>
-        {/* Navbar appears on all pages */}
         <Navbar />
-
         <Routes>
-          <Route path="/" element={<Landing />} /> {/* Landing page as home page */}
-          <Route path="/flashcards" element={<Flashcards />} />
-          <Route path="/math" element={<Math />} /> {/* Add route for Math page */}
-          <Route path="/login" element={< Login />} />
+          <Route path="/" element={<Landing />} />
+          <Route path="/flashcards" element={<Flashcards flashcards={flashcards} />} />
+          <Route path="/math" element={<Math />} />
+          <Route path="/login" element={<Login />} />
         </Routes>
-
-        {/* Footer appears on all pages */}
         <Footer />
       </div>
     </Router>
@@ -29,3 +34,4 @@ const App = () => {
 };
 
 export default App;
+
