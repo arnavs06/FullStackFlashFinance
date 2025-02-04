@@ -11,7 +11,7 @@ const App = () => {
   const [flashcards, setFlashcards] = useState([]);
 
   useEffect(() => {
-    fetch('http://localhost:5000/api/flashcards')
+      fetch('/api/flashcards')
       .then(response => response.json())
       .then(data => setFlashcards(data))
       .catch(error => console.error('Error fetching flashcards:', error));
