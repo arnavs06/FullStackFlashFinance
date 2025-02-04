@@ -3,7 +3,6 @@ import Header from '../components/Header';
 import Hero from '../components/Hero';
 import JobPostings from '../components/JobPostings';
 import FlashcardsLink from '../components/FlashcardsLink';
-import Footer from '../components/Footer';
 import '../styles/index.css'; 
 
 const Landing = () => (
