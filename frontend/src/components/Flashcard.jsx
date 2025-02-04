@@ -9,7 +9,7 @@ const Flashcard = () => {
   const [error, setError] = useState(null); 
 
   useEffect(() => {
-    fetch('/data/Flashcards.json')
+    fetch('/api/flashcards')  // ✅ Fetch from Flask backend
       .then((response) => {
         if (!response.ok) {
           throw new Error(`HTTP error! status: ${response.status}`);
@@ -17,15 +17,15 @@ const Flashcard = () => {
         return response.json();
       })
       .then((data) => {
-        setCards(data);
-        setError(null); 
+        setCards(data);  // ✅ Store fetched flashcards
+        setError(null);
       })
       .catch((err) => {
         console.error('Error loading flashcards:', err);
         setError('Failed to load flashcards. Please try again later.');
       });
   }, []);
-
+  
   const flipCard = () => {
     setIsFlipped((prevState) => !prevState);
   };
@@ -87,8 +87,8 @@ const Flashcard = () => {
           }`}
           onClick={flipCard}
         >
-          <div className="front">{flashcard.front}</div>
-          <div className="back">{flashcard.back}</div>
+          <div className="front">{flashcard.title}</div>
+          <div className="back">{flashcard.description}</div>
         </div>
       </div>
 
