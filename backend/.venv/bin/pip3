@@ -1,4 +1,4 @@
-#!/Users/arnav/Documents/coding/FlashFinanceFull/backend/.venv/bin/python3
+#!/Users/arnav/Documents/coding/FlashFinanceFull/.venv/bin/python
 # -*- coding: utf-8 -*-
 import re
 import sys
