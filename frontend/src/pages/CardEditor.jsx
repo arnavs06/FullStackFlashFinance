@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 
-const FlashcardApp = () => {
+const CardEditor = () => {
   const [flashcards, setFlashcards] = useState([]);
   const [category, setCategory] = useState("");
   const [title, setTitle] = useState("");
@@ -86,4 +86,4 @@ const FlashcardApp = () => {
   );
 };
 
-export default FlashcardApp;
+export default CardEditor;
