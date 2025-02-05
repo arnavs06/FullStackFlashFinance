@@ -6,6 +6,7 @@ import Landing from './pages/Landing';
 import Math from './pages/Math'; 
 import Footer from './components/Footer';
 import Login from './pages/Login';
+import CardEditor from './pages/CardEditor';
 
 const App = () => {
   const [flashcards, setFlashcards] = useState([]);
@@ -26,6 +27,7 @@ const App = () => {
           <Route path="/flashcards" element={<Flashcards flashcards={flashcards} />} />
           <Route path="/math" element={<Math />} />
           <Route path="/login" element={<Login />} />
+          <Route path="edit-cards" element={<CardEditor />}/>
         </Routes>
         <Footer />
       </div>
