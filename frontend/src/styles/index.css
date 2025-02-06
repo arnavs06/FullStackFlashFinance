@@ -115,14 +115,14 @@ nav ul li ul li a:hover {
 
 .hero-content {
   display: flex;
-  justify-content: flex-start;
+  flex-direction: row-reverse; /* Swap positions so the image is on the left */
   align-items: center;
   width: 100%;
 }
 
 .hero-text {
   flex: 1;
-  margin-right: 0; /* Remove margin between text and image */
+  margin-left: 2rem;  /* Remove margin between text and image */
 }
 
 .hero h1 {
@@ -137,11 +137,10 @@ nav ul li ul li a:hover {
 }
 
 .hero-image {
-  max-width: 40%; /* Make image smaller */
+  max-width: 40%;
   height: auto;
-  margin-left: -40px; /* Move the image more to the left */
-  position: absolute; /* Absolute positioning to break free from flexbox */
-  right: 0; /* Ensure it stays within the container */
+  margin-left: 0; /* Remove negative margin */
+  position: relative;  /* Ensure it stays within the container */
 }
 
 .new-job-postings {

@@ -8,7 +8,7 @@ const Hero = () => (
         <h1>Master the Interview Process</h1>
         <p>Your go-to resource for technical questions, valuation methods, and much more!</p>
       </div>
-      <img src="/cool_thing_flashfinance.png" alt="Flash Finance Logo" className="hero-image" />
+      <img src="/FlashFinanceLogo.png" alt="Flash Finance Logo" className="hero-image" />
     </div>
   </div>
 );
