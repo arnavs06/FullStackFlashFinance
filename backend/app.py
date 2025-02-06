@@ -3,6 +3,8 @@ from flask_cors import CORS
 from flask_sqlalchemy import SQLAlchemy
 import logging
 from models import db, Flashcard
+from flask_migrate import Migrate
+
 
 app = Flask(__name__)
 
@@ -39,6 +41,8 @@ def create_flashcard():
     db.session.add(new_flashcard)
     db.session.commit()
     return jsonify({'message': 'Flashcard created', 'id': new_flashcard.id}), 201
+
+migrate = Migrate(app, db)
 
 @app.route('/api/flashcards/<int:card_id>', methods=['DELETE'])
 def delete_flashcard(card_id):
