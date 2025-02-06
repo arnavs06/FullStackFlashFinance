@@ -307,3 +307,59 @@ footer {
   font-size: 1.25rem;
   font-family: 'Satoshi', sans-serif;
 }
+.menu-container {
+  position: relative;
+  display: inline-block;
+}
+
+.menu-icon {
+  padding: 8px;
+  border-radius: 8px;
+  border: 2px solid rgba(204, 162, 75, 0.8);
+  background-color: rgb(0, 51, 81);
+  color: white;
+  cursor: pointer;
+  transition: transform 0.3s ease-in-out, box-shadow 0.3s ease-in-out;
+}
+
+.menu-icon:hover {
+  transform: scale(1.1);
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+}
+
+.dropdown-menu {
+  position: absolute;
+  right: 0;
+  margin-top: 8px;
+  width: 180px;
+  background-color: rgb(0, 51, 81);
+  color: white;
+  border: 1px solid rgba(204, 162, 75, 0.8);
+  border-radius: 8px;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+  z-index: 1000;
+}
+
+.dropdown-menu ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.dropdown-menu li {
+  padding: 10px;
+  text-align: center;
+}
+
+.menu-item {
+  display: block;
+  color: white;
+  text-decoration: none;
+  font-weight: bold;
+  transition: background 0.3s ease-in-out;
+}
+
+.menu-item:hover {
+  background-color: rgba(204, 162, 75, 0.8);
+  border-radius: 5px;
+}
