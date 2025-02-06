@@ -3,8 +3,13 @@ import '../styles/index.css';
 
 const Hero = () => (
   <div className="hero">
-    <h1>Master the Interview Process</h1>
-    <p>Your go-to resource for technical questions, valuation methods, and much more!</p><img src="/cool_thing_flashfinance.png" alt="Flash Finance Logo" />
+    <div className="hero-content">
+      <div className="hero-text">
+        <h1>Master the Interview Process</h1>
+        <p>Your go-to resource for technical questions, valuation methods, and much more!</p>
+      </div>
+      <img src="/cool_thing_flashfinance.png" alt="Flash Finance Logo" className="hero-image" />
+    </div>
   </div>
 );
 
