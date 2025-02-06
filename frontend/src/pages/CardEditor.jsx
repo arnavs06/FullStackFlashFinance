@@ -7,24 +7,15 @@ const CardEditor = () => {
   const [title, setTitle] = useState("");
   const [description, setDescription] = useState("");
 
+  // Fetch flashcards from Flask API
   useEffect(() => {
-    const fetchData = async () => {
-      try {
-        const response = await fetch("http://localhost:5000/api/flashcards");
-        if (!response.ok) {
-          throw new Error(`HTTP error! status: ${response.status}`);
-        }
-        const data = await response.json();
-        setFlashcards(data);
-      } catch (err) {
-        console.error("Error fetching flashcards:", err);
-        // Add user-friendly error handling here
-      }
-    };
+    fetch("http://localhost:5000/api/flashcards")
+      .then((res) => res.json())
+      .then((data) => setFlashcards(data))
+      .catch((err) => console.error("Error fetching flashcards:", err));
+  }, []);
 
-    fetchData();
-}, []);
-
+  // Add new flashcard
   const handleAddFlashcard = () => {
     const newFlashcard = { category, title, description, mastered: false };
 
@@ -43,6 +34,7 @@ const CardEditor = () => {
       .catch((err) => console.error("Error adding flashcard:", err));
   };
 
+  // Delete a flashcard
   const handleDeleteFlashcard = (id) => {
     fetch(`http://localhost:5000/api/flashcards/${id}`, { method: "DELETE" })
       .then(() => {
