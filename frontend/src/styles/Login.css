@@ -1,43 +1,64 @@
-/* src/components/Login.css */
+@import url('https://fonts.googleapis.com/css2?family=Satoshi:wght@400;700&display=swap');
+
 .login-container {
+  font-family: 'Satoshi', sans-serif;
+  background-color: white;
+  color: rgb(0, 51, 81);
   display: flex;
   justify-content: center;
   align-items: center;
   height: 100vh;
+  padding: 2rem;
+  animation: fadeIn 1s forwards;
 }
 
 form {
-  background-color: #fff;
-  padding: 20px;
+  background-color: white;
+  padding: 2rem;
+  border: 4px solid rgba(204, 162, 75);
   border-radius: 8px;
-  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  width: 100%;
+  max-width: 400px;
+  text-align: center;
+}
+
+h2 {
+  font-size: 2rem;
+  margin-bottom: 1.5rem;
 }
 
 .form-group {
-  margin-bottom: 15px;
+  margin-bottom: 1.5rem;
+  text-align: left;
 }
 
 label {
   display: block;
-  margin-bottom: 5px;
+  font-weight: bold;
+  margin-bottom: 0.5rem;
 }
 
 input {
   width: 100%;
-  padding: 8px;
-  box-sizing: border-box;
+  padding: 0.75rem;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  font-size: 1rem;
 }
 
 button {
-  width: 100%;
-  padding: 10px;
-  background-color: #007bff;
-  color: #fff;
+  background-color: rgb(0, 51, 81);
+  color: white;
+  padding: 0.75rem 1.5rem;
   border: none;
   border-radius: 4px;
+  font-size: 1rem;
   cursor: pointer;
+  transition: background-color 0.3s ease-in-out, transform 0.2s ease-in-out;
 }
 
 button:hover {
-  background-color: #0056b3;
+  background-color: rgba(0, 51, 81, 0.9);
+  transform: translateY(-2px);
 }

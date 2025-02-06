@@ -1,96 +1,60 @@
-import React, { useState, useEffect } from "react";
-import "../styles/Flashcards.css";
+import React, { useState, useEffect } from 'react';
+import axios from 'axios';
+import '../styles/index.css';
+import '../styles/FlashcardCRUD.css';
 
-const CardEditor = () => {
-  const [flashcards, setFlashcards] = useState([]);
-  const [category, setCategory] = useState("");
-  const [title, setTitle] = useState("");
-  const [description, setDescription] = useState("");
+const FlashcardCRUD = () => {
+    const [flashcards, setFlashcards] = useState([]);
+    const [newFlashcard, setNewFlashcard] = useState({ category: '', title: '', description: '', mastered: false });
 
-  useEffect(() => {
-    const fetchData = async () => {
-      try {
-        const response = await fetch("http://localhost:5000/api/flashcards");
-        if (!response.ok) {
-          throw new Error(`HTTP error! status: ${response.status}`);
-        }
-        const data = await response.json();
-        setFlashcards(data);
-      } catch (err) {
-        console.error("Error fetching flashcards:", err);
-        // Add user-friendly error handling here
-      }
+    useEffect(() => {
+        axios.get('http://localhost:5000/api/flashcards')
+            .then(response => setFlashcards(response.data))
+            .catch(error => console.error('Error fetching flashcards:', error));
+    }, []);
+
+    const handleInputChange = (e) => {
+        const { name, value } = e.target;
+        setNewFlashcard({ ...newFlashcard, [name]: value });
     };
 
-    fetchData();
-}, []);
+    const handleSubmit = (e) => {
+        e.preventDefault();
+        axios.post('http://localhost:5000/api/flashcards', newFlashcard)
+            .then(response => {
+                setFlashcards([...flashcards, { ...newFlashcard, id: response.data.id }]);
+                setNewFlashcard({ category: '', title: '', description: '', mastered: false });
+            })
+            .catch(error => console.error('Error adding flashcard:', error));
+    };
 
-  const handleAddFlashcard = () => {
-    const newFlashcard = { category, title, description, mastered: false };
+    const handleDelete = (id) => {
+        axios.delete(`http://localhost:5000/api/flashcards/${id}`)
+            .then(() => setFlashcards(flashcards.filter(card => card.id !== id)))
+            .catch(error => console.error('Error deleting flashcard:', error));
+    };
 
-    fetch("http://localhost:5000/api/flashcards", {
-      method: "POST",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify(newFlashcard),
-    })
-      .then((res) => res.json())
-      .then((data) => {
-        setFlashcards([...flashcards, { ...newFlashcard, id: data.id }]);
-        setCategory("");
-        setTitle("");
-        setDescription("");
-      })
-      .catch((err) => console.error("Error adding flashcard:", err));
-  };
-
-  const handleDeleteFlashcard = (id) => {
-    fetch(`http://localhost:5000/api/flashcards/${id}`, { method: "DELETE" })
-      .then(() => {
-        setFlashcards(flashcards.filter((card) => card.id !== id));
-      })
-      .catch((err) => console.error("Error deleting flashcard:", err));
-  };
-
-  return (
-    <div className="flashcard-container">
-      <h1>Flashcard Manager</h1>
-      <div className="flashcard-form">
-        <input
-          type="text"
-          placeholder="Category"
-          value={category}
-          onChange={(e) => setCategory(e.target.value)}
-        />
-        <input
-          type="text"
-          placeholder="Title"
-          value={title}
-          onChange={(e) => setTitle(e.target.value)}
-        />
-        <input
-          type="text"
-          placeholder="Description"
-          value={description}
-          onChange={(e) => setDescription(e.target.value)}
-        />
-        <button onClick={handleAddFlashcard}>Add Flashcard</button>
-      </div>
-
-      <div className="flashcard-list">
-        {flashcards.map((card) => (
-          <div key={card.id} className="flashcard">
-            <div className="flashcard-front">
-              <h3>{card.title}</h3>
-              <p>{card.description}</p>
-              <p><strong>Category:</strong> {card.category}</p>
-              <button onClick={() => handleDeleteFlashcard(card.id)}>Delete</button>
+    return (
+        <div className="flashcard-crud-container">
+            <h2>Flashcard Manager</h2>
+            <form onSubmit={handleSubmit} className="flashcard-form">
+                <input type="text" name="category" placeholder="Category" value={newFlashcard.category} onChange={handleInputChange} required />
+                <input type="text" name="title" placeholder="Title" value={newFlashcard.title} onChange={handleInputChange} required />
+                <textarea name="description" placeholder="Description" value={newFlashcard.description} onChange={handleInputChange} required />
+                <button type="submit">Add Flashcard</button>
+            </form>
+            <div className="flashcard-list">
+                {flashcards.map((card) => (
+                    <div key={card.id} className="flashcard">
+                        <h3>{card.title}</h3>
+                        <p><strong>Category:</strong> {card.category}</p>
+                        <p>{card.description}</p>
+                        <button onClick={() => handleDelete(card.id)}>Delete</button>
+                    </div>
+                ))}
             </div>
-          </div>
-        ))}
-      </div>
-    </div>
-  );
+        </div>
+    );
 };
 
-export default CardEditor;
-
+export default FlashcardCRUD;
