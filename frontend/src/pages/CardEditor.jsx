@@ -1,7 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import '../styles/index.css';
-import '../styles/FlashcardCRUD.css';
 
 const FlashcardCRUD = () => {
     const [flashcards, setFlashcards] = useState([]);
