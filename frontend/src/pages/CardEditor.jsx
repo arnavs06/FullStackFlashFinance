@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from "react";
+import "../styles/Flashcards.css";
 
 const CardEditor = () => {
   const [flashcards, setFlashcards] = useState([]);
@@ -6,7 +7,6 @@ const CardEditor = () => {
   const [title, setTitle] = useState("");
   const [description, setDescription] = useState("");
 
-  // Fetch flashcards from backend
   useEffect(() => {
     fetch("http://localhost:5000/api/flashcards")
       .then((res) => res.json())
@@ -14,7 +14,6 @@ const CardEditor = () => {
       .catch((err) => console.error("Error fetching flashcards:", err));
   }, []);
 
-  // Add new flashcard
   const handleAddFlashcard = () => {
     const newFlashcard = { category, title, description, mastered: false };
 
@@ -33,7 +32,6 @@ const CardEditor = () => {
       .catch((err) => console.error("Error adding flashcard:", err));
   };
 
-  // Delete flashcard
   const handleDeleteFlashcard = (id) => {
     fetch(`http://localhost:5000/api/flashcards/${id}`, { method: "DELETE" })
       .then(() => {
@@ -45,8 +43,6 @@ const CardEditor = () => {
   return (
     <div className="flashcard-container">
       <h1>Flashcard Manager</h1>
-
-      {/* Flashcard Input Form */}
       <div className="flashcard-form">
         <input
           type="text"
@@ -56,28 +52,28 @@ const CardEditor = () => {
         />
         <input
           type="text"
-          placeholder="Title"
+          placeholder="Term"
           value={title}
           onChange={(e) => setTitle(e.target.value)}
         />
         <input
           type="text"
-          placeholder="Description"
+          placeholder="Definition"
           value={description}
           onChange={(e) => setDescription(e.target.value)}
         />
-        <button onClick={handleAddFlashcard}>Add Flashcard</button>
+        <button className="control-btn" onClick={handleAddFlashcard}>Add Flashcard</button>
       </div>
-
-      {/* Flashcards List */}
       <div className="flashcard-list">
         {flashcards.map((card) => (
           <div key={card.id} className="flashcard">
-            <div className="flashcard-front">
+            <div className="front">
               <h3>{card.title}</h3>
+            </div>
+            <div className="back">
               <p>{card.description}</p>
               <p><strong>Category:</strong> {card.category}</p>
-              <button onClick={() => handleDeleteFlashcard(card.id)}>Delete</button>
+              <button className="control-btn" onClick={() => handleDeleteFlashcard(card.id)}>Delete</button>
             </div>
           </div>
         ))}
