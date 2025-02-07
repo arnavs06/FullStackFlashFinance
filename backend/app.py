@@ -1,19 +1,27 @@
 from flask import Flask, jsonify, request
 from flask_cors import CORS
 from flask_sqlalchemy import SQLAlchemy
+from flask_migrate import Migrate
 import logging
 from models import db, Flashcard
 
+# Initialize app and database
 app = Flask(__name__)
 
 # Use PostgreSQL instead of SQLite if in production
 app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///flashcards.db'
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 
+# Initialize the SQLAlchemy db
 db.init_app(app)
 
+# Initialize Flask-Migrate
+migrate = Migrate(app, db)
+
+# Enable CORS
 CORS(app, resources={r"/api/*": {"origins": "*"}})
 
+# Set up logging
 logging.basicConfig(level=logging.DEBUG)
 
 @app.route('/api/flashcards', methods=['GET'])
