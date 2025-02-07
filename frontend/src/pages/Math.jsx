@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { Box, Heading, Text, Input, Button, VStack, HStack } from "@chakra-ui/react";
-import Navbar from "../components/Navbar";
+//import Navbar from "../components/Navbar";
 
 const Math = () => {
   const [questions, setQuestions] = useState([]);
@@ -49,7 +49,7 @@ const Math = () => {
 
   return (
     <Box>
-      <Navbar />
+      
       <Box
         maxW="800px"
         mx="auto"
