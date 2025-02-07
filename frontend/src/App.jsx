@@ -24,10 +24,10 @@ const App = () => {
       <div>
         <Navbar />
         <Routes>
-          <Route path="/" element={<Login />} />
+          <Route path="/" element={<Landing />} />
           <Route path="/flashcards" element={<Flashcards flashcards={flashcards} />} />
           <Route path="/math" element={<Math />} />
-          <Route path="/home" element={<Landing />} />
+          <Route path="/login" element={<Login />} />
           <Route path="edit-cards" element={<CardEditor />}/>
           <Route path="/admin" element={<AdminDashboard />} />
         </Routes>
