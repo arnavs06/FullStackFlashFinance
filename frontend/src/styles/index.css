@@ -7,6 +7,8 @@ body {
   color: rgb(0, 51, 81);
   opacity: 0;
   animation: fadeIn 0.5s forwards;
+  padding-left: 180px; /* Adjusted for smaller navbar */
+  width: calc(100% - 180px); /* Full width minus navbar */
 }
 
 @keyframes fadeIn {
@@ -18,102 +20,78 @@ body {
   }
 }
 
+/* Sidebar Navbar */
 header {
   background-color: rgb(0, 51, 81);
   color: white;
-  padding: 1rem 2rem;
+  padding: 1.2rem 0.5rem;
   display: flex;
-  justify-content: space-between;
+  flex-direction: column;
   align-items: center;
-  position: fixed; 
-  top: 0;
+  position: fixed;
   left: 0;
-  right: 0;
+  top: 0;
+  bottom: 0;
+  width: 140px; /* Reduced width */
+  height: 100vh;
   z-index: 1000;
-  transition: top 0.3s; 
   border: 4px solid rgba(204, 162, 75); 
-  border-radius: 8px;
-  width: 100%; /* Full width */
-  height: 80px; /* Set a fixed height for the navbar */
-}
-
-/* Add padding-top to the body or content wrapper to avoid overlap */
-body {
-  padding-top: 80px; /* Adjust this value to the height of the navbar */
+  border-radius: 8px 0 0 8px;
 }
 
 header .logo {
-  font-family: 'Satoshi', sans-serif;
-  font-size: 1.5rem;
+  font-size: 1.4rem;
   font-weight: bold;
+  text-align: center;
 }
 
 nav ul {
   list-style: none;
-  display: flex;
-  margin: 0;
   padding: 0;
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+  width: 100%;
 }
 
 nav ul li {
-  margin-left: 20px;
-  position: relative;
+  margin: 12px 0;
+  text-align: center;
 }
 
 nav ul li a {
   color: white;
   text-decoration: none;
   font-weight: bold;
-  padding: 0.5rem 0;
-}
-
-nav ul li:hover > a {
-  text-decoration: underline;
-}
-
-nav ul li ul {
-  display: none;
-  position: absolute;
-  background-color: white;
-  color: rgb(0, 51, 81);
-  top: 2rem;
-  left: 0;
-  border: 1px solid #ddd;
-  border-radius: 4px;
-  z-index: 1000;
-}
-
-nav ul li:hover ul {
   display: block;
+  padding: 6px;
+  font-size: 0.9rem;
+  transition: background 0.3s;
 }
 
-nav ul li ul li {
-  padding: 0.5rem 1rem;
-  white-space: nowrap;
+nav ul li a:hover {
+  background-color: rgba(204, 162, 75, 0.8);
+  border-radius: 5px;
 }
 
-nav ul li ul li a {
-  color: rgb(0, 51, 81);
-  text-decoration: none;
-}
-
-nav ul li ul li a:hover {
-  text-decoration: underline;
+/* Make all content take full width */
+.hero,
+.content,
+.new-job-postings,
+footer {
+  width: 100%;
+  max-width: 100%;
+  margin-left: 0;
+  margin-right: 0;
+  padding-left: 2rem;
+  padding-right: 2rem;
 }
 
 .hero {
-  font-family: 'Satoshi', sans-serif;
   background-color: white;
   color: rgb(0, 51, 81);
   text-align: left;
-  padding: 6rem 2rem;
-  animation: fadeIn 1s forwards;
-  position: relative;
-  z-index: 2;
-  margin-top: 0;
-  margin-left: auto;
-  margin-right: auto;
-  width: 85%; /* Reduce width to leave more space */
+  padding: 5rem 2rem;
   min-height: 40vh;
   display: flex;
   justify-content: flex-start;
@@ -122,23 +100,21 @@ nav ul li ul li a:hover {
 
 .hero-content {
   display: flex;
-  flex-direction: row-reverse; /* Swap positions so the image is on the left */
+  flex-direction: row-reverse;
   align-items: center;
   width: 100%;
 }
 
 .hero-text {
   flex: 1;
-  margin-left: 2rem;  /* Remove margin between text and image */
+  margin-left: 2rem;
 }
 
 .hero h1 {
   font-size: 3rem;
-  font-family: 'Satoshi', sans-serif;
 }
 
 .hero p {
-  font-family: 'Satoshi', sans-serif;
   font-size: 1.3rem;
   margin-top: 1rem;
 }
@@ -146,32 +122,27 @@ nav ul li ul li a:hover {
 .hero-image {
   max-width: 40%;
   height: auto;
-  margin-left: 0; /* Remove negative margin */
-  position: relative;  /* Ensure it stays within the container */
 }
 
+/* Job Postings */
 .new-job-postings {
   background-color: rgb(0, 51, 81);
   padding: 3rem 1rem;
   text-align: center;
-  margin-top: 4rem;
-  border: 4px solid rgba(204, 162, 75);
-  border-radius: 8px;
+  border-left: none;
+  border-right: none;
 }
 
 .new-job-postings h2 {
   font-size: 2rem;
   color: white;
-  background-color: rgb(0, 51, 81);
-  font-family: 'Satoshi', sans-serif;
 }
 
 .job-card-container {
   display: flex;
   flex-wrap: wrap;
-  justify-content: center;
-  gap: 2rem;
-  margin-top: 2rem;
+  justify-content: space-around;
+  width: 100%;
 }
 
 .job-card {
@@ -189,13 +160,6 @@ nav ul li ul li a:hover {
   font-size: 1.5rem;
   color: rgb(0, 51, 81);
   margin-bottom: 1rem;
-  font-family: 'Satoshi', sans-serif;
-}
-
-.job-card p {
-  font-size: 1rem;
-  color: #555;
-  font-family: 'Satoshi', sans-serif;
 }
 
 .job-card:hover {
@@ -203,22 +167,22 @@ nav ul li ul li a:hover {
   box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
 }
 
+/* Other Content */
 .content {
   padding: 2rem;
   text-align: center;
-  animation: fadeIn 1s forwards;
 }
 
 .content h2 {
   color: rgb(0, 51, 81);
-  font-family: 'Satoshi', sans-serif;
 }
 
 .content .card-container {
   display: flex;
   flex-wrap: wrap;
-  justify-content: center;
+  justify-content: space-around;
   gap: 1rem;
+  width: 100%;
 }
 
 .card {
@@ -228,24 +192,8 @@ nav ul li ul li a:hover {
   width: 250px;
   background-color: white;
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-  opacity: 0;
-  animation: fadeInCard 1s forwards;
   transition: transform 0.3s ease-in-out, box-shadow 0.3s ease-in-out;
   cursor: pointer;
-}
-
-.card h3 {
-  color: rgb(0, 51, 81);
-  margin: 0;
-  font-size: 1.2rem;
-  font-family: 'Satoshi', sans-serif;
-}
-
-.card p {
-  font-size: 0.9rem;
-  color: #666;
-  margin: 0.5rem 0 0;
-  font-family: 'Satoshi', sans-serif;
 }
 
 .card:hover {
@@ -253,36 +201,23 @@ nav ul li ul li a:hover {
   box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
 }
 
-@keyframes fadeInCard {
-  0% {
-    opacity: 0;
-  }
-  100% {
-    opacity: 1;
-  }
-}
-
+/* Footer */
 footer {
   background-color: rgb(0, 51, 81);
   color: white;
   padding: 1rem;
   text-align: center;
-  animation: fadeIn 1s forwards;
-  border: 4px solid rgba(204, 162, 75);
-  border-radius: 8px;
-  font-family: 'Satoshi', sans-serif;
+  border-left: none;
+  border-right: none;
 }
 
-.logo img {
-  max-width: 150px;
-  height: auto;
-}
-
+/* Flashcards */
 .flashcard-container {
   display: flex;
   flex-direction: column;
   gap: 20px;
   align-items: center;
+  width: 100%;
   margin-top: 100px;
 }
 
@@ -304,7 +239,6 @@ footer {
   padding: 20px;
   font-size: 1.5rem;
   text-align: center;
-  font-family: 'Satoshi', sans-serif;
 }
 
 .flashcard-back {
@@ -313,29 +247,9 @@ footer {
   padding: 20px;
   font-size: 1.5rem;
   text-align: center;
-  font-family: 'Satoshi', sans-serif;
 }
 
-.flashcard-content {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  height: 100%;
-  font-size: 2rem;
-  font-family: 'Satoshi', sans-serif;
-}
-
-.flashcard-content {
-  width: 100%;
-  height: 100%;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  text-align: center;
-  font-size: 1.25rem;
-  font-family: 'Satoshi', sans-serif;
-}
-
+/* Dropdown Menu */
 .menu-container {
   position: relative;
   display: inline-block;
@@ -348,17 +262,11 @@ footer {
   background-color: rgb(0, 51, 81);
   color: white;
   cursor: pointer;
-  transition: transform 0.3s ease-in-out, box-shadow 0.3s ease-in-out;
-}
-
-.menu-icon:hover {
-  transform: scale(1.1);
-  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
 }
 
 .dropdown-menu {
   position: absolute;
-  left: 0; /* Move the dropdown menu to the left */
+  left: 0;
   margin-top: 8px;
   width: 180px;
   background-color: rgb(0, 51, 81);
@@ -366,7 +274,6 @@ footer {
   border: 1px solid rgba(204, 162, 75, 0.8);
   border-radius: 8px;
   box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
-  z-index: 1000;
 }
 
 .dropdown-menu ul {
