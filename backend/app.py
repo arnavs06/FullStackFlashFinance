@@ -20,11 +20,9 @@ class Flashcard(db.Model):
     question = db.Column(db.String(255), nullable=False)
     answer = db.Column(db.String(255), nullable=False)
 
-# Route to initialize the database
-@app.route('/initdb')
-def init_db():
+# Auto-create the database & tables on startup
+with app.app_context():
     db.create_all()
-    return "Database initialized!"
 
 # Route to get all flashcards
 @app.route('/api/flashcards', methods=['GET'])
