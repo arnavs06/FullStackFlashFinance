@@ -9,22 +9,20 @@ const Flashcard = () => {
   const [error, setError] = useState(null); 
 
   useEffect(() => {
-    fetch('/api/flashcards')  // ✅ Fetch from Flask backend
+    fetch(`${import.meta.env.VITE_API_BASE_URL}/flashcards`)
       .then((response) => {
-        if (!response.ok) {
-          throw new Error(`HTTP error! status: ${response.status}`);
-        }
-        return response.json();
+          if (!response.ok) throw new Error(`HTTP error! status: ${response.status}`);
+          return response.json();
       })
       .then((data) => {
-        setCards(data);  // ✅ Store fetched flashcards
-        setError(null);
+          setCards(data);
+          setError(null);
       })
       .catch((err) => {
-        console.error('Error loading flashcards:', err);
-        setError('Failed to load flashcards. Please try again later.');
+          console.error("Error loading flashcards:", err);
+          setError("Failed to load flashcards. Please try again later.");
       });
-  }, []);
+}, []);
   
   const flipCard = () => {
     setIsFlipped((prevState) => !prevState);
