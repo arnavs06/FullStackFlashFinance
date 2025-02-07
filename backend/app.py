@@ -1,53 +1,53 @@
-from flask import Flask, request, jsonify
-from flask_sqlalchemy import SQLAlchemy
+from flask import Flask, jsonify, request
 from flask_cors import CORS
+from flask_sqlalchemy import SQLAlchemy
+import logging
+from models import db, Flashcard
 
 app = Flask(__name__)
 
-# App configuration
-app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///flashcards.db'  
+# Use PostgreSQL instead of SQLite if in production
+app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///flashcards.db'
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 
-# Initialize extensions
-db = SQLAlchemy(app)
+db.init_app(app)
 
-# Enable CORS
-CORS(app, resources={r"/*": {"origins": "http://localhost:5173"}})
+CORS(app, resources={r"/api/*": {"origins": "*"}})
 
-# Define the Flashcard Model
-class Flashcard(db.Model):
-    id = db.Column(db.Integer, primary_key=True)
-    question = db.Column(db.String(255), nullable=False)
-    answer = db.Column(db.String(255), nullable=False)
+logging.basicConfig(level=logging.DEBUG)
 
-# Auto-create the database & tables on startup
-with app.app_context():
-    db.create_all()
-
-# Route to get all flashcards
 @app.route('/api/flashcards', methods=['GET'])
 def get_flashcards():
     flashcards = Flashcard.query.all()
-    return jsonify([{"id": f.id, "question": f.question, "answer": f.answer} for f in flashcards])
+    return jsonify([{
+        'id': card.id,
+        'category': card.category,
+        'title': card.title,
+        'description': card.description,
+        'mastered': card.mastered
+    } for card in flashcards])
 
-# Route to add a flashcard
 @app.route('/api/flashcards', methods=['POST'])
-def add_flashcard():
+def create_flashcard():
     data = request.json
-    new_flashcard = Flashcard(question=data['question'], answer=data['answer'])
+    new_flashcard = Flashcard(
+        category=data['category'],
+        title=data['title'],
+        description=data['description'],
+        mastered=data.get('mastered', False)
+    )
     db.session.add(new_flashcard)
     db.session.commit()
-    return jsonify({"message": "Flashcard added successfully"}), 201
+    return jsonify({'message': 'Flashcard created', 'id': new_flashcard.id}), 201
 
-# Route to delete a flashcard
-@app.route('/api/flashcards/<int:id>', methods=['DELETE'])
-def delete_flashcard(id):
-    flashcard = Flashcard.query.get(id)
-    if flashcard:
-        db.session.delete(flashcard)
-        db.session.commit()
-        return jsonify({"message": "Flashcard deleted successfully"}), 200
-    return jsonify({"message": "Flashcard not found"}), 404
+@app.route('/api/flashcards/<int:card_id>', methods=['DELETE'])
+def delete_flashcard(card_id):
+    flashcard = Flashcard.query.get(card_id)
+    if not flashcard:
+        return jsonify({'error': 'Flashcard not found'}), 404
+    db.session.delete(flashcard)
+    db.session.commit()
+    return jsonify({'message': 'Flashcard deleted'}), 200
 
 if __name__ == '__main__':
-    app.run(debug=True)
+    app.run(debug=True, port=5000)
