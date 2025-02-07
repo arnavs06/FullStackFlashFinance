@@ -4,15 +4,19 @@ import {
   Box,
   Button,
   Input,
+  Spinner,
+  useToast,
+} from "@chakra-ui/react";
+
+import {
   Table,
   Thead,
   Tbody,
   Tr,
   Th,
   Td,
-  Spinner,
-  useToast,
-} from "@chakra-ui/react";
+} from "@chakra-ui/table";
+
 
 const FlashcardDashboard = () => {
   const [flashcards, setFlashcards] = useState([]);
