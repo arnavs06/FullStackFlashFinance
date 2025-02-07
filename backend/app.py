@@ -19,8 +19,7 @@ db.init_app(app)
 migrate = Migrate(app, db)
 
 # Enable CORS
-CORS(app, resources={r"/api/*": {"origins": "*"}})
-
+CORS(app, resources={r"/api/*": {"origins": "*"}}, supports_credentials=True)
 # Set up logging
 logging.basicConfig(level=logging.DEBUG)
 
