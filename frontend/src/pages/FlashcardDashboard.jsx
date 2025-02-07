@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from "react";
+import axios from "axios";
 import {
   ChakraProvider,
   Box,
@@ -31,9 +32,8 @@ const FlashcardDashboard = () => {
   const fetchFlashcards = async () => {
     setLoading(true);
     try {
-      const response = await fetch("http://localhost:5000/api/flashcards");
-      const data = await response.json();
-      setFlashcards(data);
+      const response = await axios.get("http://127.0.0.1:5000/api/flashcards");
+      setFlashcards(response.data);
     } catch (error) {
       toast({ title: "Error fetching flashcards", status: "error", duration: 3000, isClosable: true });
     } finally {
