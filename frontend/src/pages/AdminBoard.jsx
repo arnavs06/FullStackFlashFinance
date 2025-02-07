@@ -1,95 +1,109 @@
-import { useEffect, useState } from "react";
-import axios from "axios";
+import React, { useEffect, useState } from "react";
+import {
+  ChakraProvider,
+  Box,
+  Button,
+  Input,
+  Table,
+  Thead,
+  Tbody,
+  Tr,
+  Th,
+  Td,
+  Spinner,
+  useToast,
+} from "@chakra-ui/react";
 
-export default function AdminDashboard() {
-    const [flashcards, setFlashcards] = useState([]);
-    const [newFlashcard, setNewFlashcard] = useState({ question: "", answer: "" });
-    const [token, setToken] = useState(localStorage.getItem("token") || "");
+const FlashcardDashboard = () => {
+  const [flashcards, setFlashcards] = useState([]);
+  const [newFlashcard, setNewFlashcard] = useState({ category: "", title: "", description: "" });
+  const [loading, setLoading] = useState(false);
+  const toast = useToast();
 
-    useEffect(() => {
-        if (token) fetchFlashcards();
-    }, [token]);
+  useEffect(() => {
+    fetchFlashcards();
+  }, []);
 
-    const fetchFlashcards = async () => {
-        try {
-            const res = await axios.get("http://127.0.0.1:5000/flashcards", {
-                headers: { Authorization: `Bearer ${token}` },
-            });
-            setFlashcards(res.data);
-        } catch (err) {
-            console.error(err);
-        }
-    };
+  const fetchFlashcards = async () => {
+    setLoading(true);
+    try {
+      const response = await fetch("http://localhost:5000/api/flashcards");
+      const data = await response.json();
+      setFlashcards(data);
+    } catch (error) {
+      toast({ title: "Error fetching flashcards", status: "error", duration: 3000, isClosable: true });
+    } finally {
+      setLoading(false);
+    }
+  };
 
-    const handleLogin = async () => {
-        const username = prompt("Enter username:");
-        const password = prompt("Enter password:");
-        try {
-            const res = await axios.post("http://127.0.0.1:5000/login", { username, password });
-            localStorage.setItem("token", res.data.access_token);
-            setToken(res.data.access_token);
-            fetchFlashcards();
-        } catch (err) {
-            alert("Invalid credentials");
-        }
-    };
+  const addFlashcard = async () => {
+    try {
+      const response = await fetch("http://localhost:5000/api/flashcards", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(newFlashcard),
+      });
+      if (response.ok) {
+        toast({ title: "Flashcard added!", status: "success", duration: 3000, isClosable: true });
+        fetchFlashcards();
+        setNewFlashcard({ category: "", title: "", description: "" });
+      }
+    } catch (error) {
+      toast({ title: "Error adding flashcard", status: "error", duration: 3000, isClosable: true });
+    }
+  };
 
-    const addFlashcard = async () => {
-        try {
-            await axios.post("http://127.0.0.1:5000/flashcards", newFlashcard, {
-                headers: { Authorization: `Bearer ${token}` },
-            });
-            fetchFlashcards();
-        } catch (err) {
-            console.error(err);
-        }
-    };
+  const deleteFlashcard = async (id) => {
+    try {
+      const response = await fetch(`http://localhost:5000/api/flashcards/${id}`, { method: "DELETE" });
+      if (response.ok) {
+        toast({ title: "Flashcard deleted!", status: "success", duration: 3000, isClosable: true });
+        fetchFlashcards();
+      }
+    } catch (error) {
+      toast({ title: "Error deleting flashcard", status: "error", duration: 3000, isClosable: true });
+    }
+  };
 
-    const deleteFlashcard = async (id) => {
-        try {
-            await axios.delete(`http://127.0.0.1:5000/flashcards/${id}`, {
-                headers: { Authorization: `Bearer ${token}` },
-            });
-            fetchFlashcards();
-        } catch (err) {
-            console.error(err);
-        }
-    };
+  return (
+    <ChakraProvider>
+      <Box p={6} maxW="800px" mx="auto">
+        <Box mb={4}>
+          <Input placeholder="Category" value={newFlashcard.category} onChange={(e) => setNewFlashcard({ ...newFlashcard, category: e.target.value })} mb={2} />
+          <Input placeholder="Title" value={newFlashcard.title} onChange={(e) => setNewFlashcard({ ...newFlashcard, title: e.target.value })} mb={2} />
+          <Input placeholder="Description" value={newFlashcard.description} onChange={(e) => setNewFlashcard({ ...newFlashcard, description: e.target.value })} mb={2} />
+          <Button colorScheme="blue" onClick={addFlashcard}>Add Flashcard</Button>
+        </Box>
+        {loading ? (
+          <Spinner />
+        ) : (
+          <Table variant="simple">
+            <Thead>
+              <Tr>
+                <Th>Category</Th>
+                <Th>Title</Th>
+                <Th>Description</Th>
+                <Th>Actions</Th>
+              </Tr>
+            </Thead>
+            <Tbody>
+              {flashcards.map((card) => (
+                <Tr key={card.id}>
+                  <Td>{card.category}</Td>
+                  <Td>{card.title}</Td>
+                  <Td>{card.description}</Td>
+                  <Td>
+                    <Button colorScheme="red" size="sm" onClick={() => deleteFlashcard(card.id)}>Delete</Button>
+                  </Td>
+                </Tr>
+              ))}
+            </Tbody>
+          </Table>
+        )}
+      </Box>
+    </ChakraProvider>
+  );
+};
 
-    return (
-        <div className="p-6 bg-gray-900 text-white min-h-screen">
-            <h1 className="text-3xl mb-4">Admin Dashboard</h1>
-            {!token ? (
-                <button onClick={handleLogin} className="p-2 bg-blue-500 rounded">Login</button>
-            ) : (
-                <>
-                    <div className="mb-4">
-                        <input
-                            type="text"
-                            placeholder="Question"
-                            value={newFlashcard.question}
-                            onChange={(e) => setNewFlashcard({ ...newFlashcard, question: e.target.value })}
-                            className="p-2 text-black"
-                        />
-                        <input
-                            type="text"
-                            placeholder="Answer"
-                            value={newFlashcard.answer}
-                            onChange={(e) => setNewFlashcard({ ...newFlashcard, answer: e.target.value })}
-                            className="p-2 text-black"
-                        />
-                        <button onClick={addFlashcard} className="p-2 bg-green-500 ml-2 rounded">Add Flashcard</button>
-                    </div>
-                    <ul>
-                        {flashcards.map((flashcard) => (
-                            <li key={flashcard.id} className="p-2 bg-gray-800 my-2 flex justify-between">
-                                {flashcard.question} - {flashcard.answer}
-                                <button onClick={() => deleteFlashcard(flashcard.id)} className="p-2 bg-red-500 rounded">Delete</button>
-                            </li>
-                        ))}
-                    </ul>
-                </>
-            )}
-        </div>
-    );
-}
+export default FlashcardDashboard;
