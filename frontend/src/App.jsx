@@ -7,7 +7,7 @@ import Math from './pages/Math';
 import Footer from './components/Footer';
 import Login from './pages/Login';
 import CardEditor from './pages/CardEditor';
-import AdminDashboard from './pages/AdminBoard';
+import FlashcardDashboard from './pages/FlashcardDashboard';
 
 const App = () => {
   const [flashcards, setFlashcards] = useState([]);
@@ -29,7 +29,7 @@ const App = () => {
           <Route path="/math" element={<Math />} />
           <Route path="/login" element={<Login />} />
           <Route path="edit-cards" element={<CardEditor />}/>
-          <Route path="/admin" element={<AdminDashboard />} />
+          <Route path="/cardboard" element={<FlashcardDashboard />} />
         </Routes>
         <Footer />
       </div>
