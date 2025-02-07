@@ -42,7 +42,6 @@ body {
   padding-top: 80px; /* Adjust this value to the height of the navbar */
 }
 
-
 header .logo {
   font-family: 'Satoshi', sans-serif;
   font-size: 1.5rem;
@@ -336,6 +335,7 @@ footer {
   font-size: 1.25rem;
   font-family: 'Satoshi', sans-serif;
 }
+
 .menu-container {
   position: relative;
   display: inline-block;
@@ -358,7 +358,7 @@ footer {
 
 .dropdown-menu {
   position: absolute;
-  right: 0;
+  left: 0; /* Move the dropdown menu to the left */
   margin-top: 8px;
   width: 180px;
   background-color: rgb(0, 51, 81);
