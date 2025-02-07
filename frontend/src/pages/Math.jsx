@@ -1,6 +1,5 @@
 import React, { useState, useEffect } from "react";
 import { Box, Heading, Text, Input, Button, VStack, HStack } from "@chakra-ui/react";
-import Header from "../components/Header";
 import Navbar from "../components/Navbar";
 
 const Math = () => {
@@ -63,7 +62,7 @@ const Math = () => {
         textAlign="left"
         transition="transform 0.3s ease, box-shadow 0.3s ease"
         _hover={{ transform: "translateY(-8px)", boxShadow: "xl" }}
-        mt={10}
+        mt={20} // Adjust this value to increase the space below the navbar
       >
         <Heading as="h2" size="xl" color="rgb(0, 51, 81)" mb={4}>
           {currentQuestion.question}
