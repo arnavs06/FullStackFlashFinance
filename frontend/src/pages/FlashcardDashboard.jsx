@@ -18,7 +18,6 @@ import {
   Td,
 } from "@chakra-ui/table";
 
-
 const FlashcardDashboard = () => {
   const [flashcards, setFlashcards] = useState([]);
   const [newFlashcard, setNewFlashcard] = useState({ category: "", title: "", description: "" });
@@ -43,25 +42,24 @@ const FlashcardDashboard = () => {
 
   const addFlashcard = async () => {
     try {
-      const response = await fetch("http://localhost:5000/api/flashcards", {
-        method: "POST",
+      const response = await axios.post("http://127.0.0.1:5000/api/flashcards", newFlashcard, {
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify(newFlashcard),
       });
-      if (response.ok) {
+      if (response.status === 200) {
         toast({ title: "Flashcard added!", status: "success", duration: 3000, isClosable: true });
         fetchFlashcards();
         setNewFlashcard({ category: "", title: "", description: "" });
       }
     } catch (error) {
+      console.error("Error adding flashcard:", error);
       toast({ title: "Error adding flashcard", status: "error", duration: 3000, isClosable: true });
     }
   };
 
   const deleteFlashcard = async (id) => {
     try {
-      const response = await fetch(`http://localhost:5000/api/flashcards/${id}`, { method: "DELETE" });
-      if (response.ok) {
+      const response = await axios.delete(`http://127.0.0.1:5000/api/flashcards/${id}`);
+      if (response.status === 200) {
         toast({ title: "Flashcard deleted!", status: "success", duration: 3000, isClosable: true });
         fetchFlashcards();
       }
@@ -72,17 +70,33 @@ const FlashcardDashboard = () => {
 
   return (
     <ChakraProvider>
-      <Box p={6} maxW="800px" mx="auto">
+      <Box>
         <Box mb={4}>
-          <Input placeholder="Category" value={newFlashcard.category} onChange={(e) => setNewFlashcard({ ...newFlashcard, category: e.target.value })} mb={2} />
-          <Input placeholder="Title" value={newFlashcard.title} onChange={(e) => setNewFlashcard({ ...newFlashcard, title: e.target.value })} mb={2} />
-          <Input placeholder="Description" value={newFlashcard.description} onChange={(e) => setNewFlashcard({ ...newFlashcard, description: e.target.value })} mb={2} />
-          <Button colorScheme="blue" onClick={addFlashcard}>Add Flashcard</Button>
+          <Input
+            placeholder="Category"
+            value={newFlashcard.category}
+            onChange={(e) => setNewFlashcard({ ...newFlashcard, category: e.target.value })}
+            mb={2}
+          />
+          <Input
+            placeholder="Title"
+            value={newFlashcard.title}
+            onChange={(e) => setNewFlashcard({ ...newFlashcard, title: e.target.value })}
+            mb={2}
+          />
+          <Input
+            placeholder="Description"
+            value={newFlashcard.description}
+            onChange={(e) => setNewFlashcard({ ...newFlashcard, description: e.target.value })}
+            mb={2}
+          />
+          <Button onClick={addFlashcard} colorScheme="teal">Add Flashcard</Button>
         </Box>
+
         {loading ? (
-          <Spinner />
+          <Spinner size="xl" />
         ) : (
-          <Table variant="simple">
+          <Table>
             <Thead>
               <Tr>
                 <Th>Category</Th>
@@ -92,13 +106,13 @@ const FlashcardDashboard = () => {
               </Tr>
             </Thead>
             <Tbody>
-              {flashcards.map((card) => (
-                <Tr key={card.id}>
-                  <Td>{card.category}</Td>
-                  <Td>{card.title}</Td>
-                  <Td>{card.description}</Td>
+              {flashcards.map((flashcard) => (
+                <Tr key={flashcard.id}>
+                  <Td>{flashcard.category}</Td>
+                  <Td>{flashcard.title}</Td>
+                  <Td>{flashcard.description}</Td>
                   <Td>
-                    <Button colorScheme="red" size="sm" onClick={() => deleteFlashcard(card.id)}>Delete</Button>
+                    <Button onClick={() => deleteFlashcard(flashcard.id)} colorScheme="red">Delete</Button>
                   </Td>
                 </Tr>
               ))}
