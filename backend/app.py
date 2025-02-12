@@ -8,8 +8,8 @@ from models import db, Flashcard
 # Initialize app and database
 app = Flask(__name__)
 
-# Use PostgreSQL instead of SQLite if in production
-app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///flashcards.db'
+# Use MySQL instead of SQLite
+app.config['SQLALCHEMY_DATABASE_URI'] = 'mysql+pymysql://username:password@localhost/flashcards_db'
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 
 # Initialize the SQLAlchemy db
