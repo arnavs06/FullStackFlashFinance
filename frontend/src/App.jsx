@@ -8,6 +8,7 @@ import Footer from './components/Footer';
 import Login from './pages/Login';
 import CardEditor from './pages/CardEditor';
 import FlashcardDashboard from './pages/FlashcardDashboard';
+import AIQuestions from './pages/AIQuestions';
 
 const App = () => {
   const [flashcards, setFlashcards] = useState([]);
@@ -30,6 +31,7 @@ const App = () => {
           <Route path="/login" element={<Login />} />
           <Route path="edit-cards" element={<CardEditor />}/>
           <Route path="/cardboard" element={<FlashcardDashboard />} />
+          <Royte path="/testing" element={<AIQuestions />} />
         </Routes>
         <Footer />
       </div>
