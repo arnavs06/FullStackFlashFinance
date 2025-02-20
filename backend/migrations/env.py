@@ -111,3 +111,9 @@ if context.is_offline_mode():
     run_migrations_offline()
 else:
     run_migrations_online()
+
+DB_USER='arnav'
+DB_PASSWORD='youngthugtower_goated'
+DB_HOST='localhost'
+DB_NAME='flashcards_db'
+SECRET_KEY='shmeekykleeky_twizz'
