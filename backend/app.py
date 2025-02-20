@@ -2,17 +2,21 @@ from flask import Flask, jsonify, request
 from flask_cors import CORS
 from flask_sqlalchemy import SQLAlchemy
 from flask_migrate import Migrate
-import logging
+import os
+from dotenv import load_dotenv
 from models import db, Flashcard
 
-# Initialize app and database
+# Load environment variables
+load_dotenv()
+
+# Initialize Flask app
 app = Flask(__name__)
 
-# Use MySQL instead of SQLite
-app.config['SQLALCHEMY_DATABASE_URI'] = 'mysql+pymysql://username:password@localhost/flashcards_db'
+# Configure MySQL Database
+app.config['SQLALCHEMY_DATABASE_URI'] = f"mysql+pymysql://{os.getenv('DB_USER')}:{os.getenv('DB_PASSWORD')}@{os.getenv('DB_HOST')}/{os.getenv('DB_NAME')}"
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 
-# Initialize the SQLAlchemy db
+# Initialize Database
 db.init_app(app)
 
 # Initialize Flask-Migrate
@@ -20,8 +24,6 @@ migrate = Migrate(app, db)
 
 # Enable CORS
 CORS(app, resources={r"/api/*": {"origins": "*"}}, supports_credentials=True)
-# Set up logging
-logging.basicConfig(level=logging.DEBUG)
 
 @app.route('/api/flashcards', methods=['GET'])
 def get_flashcards():
