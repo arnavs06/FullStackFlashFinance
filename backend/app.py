@@ -4,7 +4,6 @@ from flask_sqlalchemy import SQLAlchemy
 from flask_migrate import Migrate
 import os
 from dotenv import load_dotenv
-from models import db, Flashcard
 
 # Load environment variables
 load_dotenv()
@@ -17,7 +16,7 @@ app.config['SQLALCHEMY_DATABASE_URI'] = f"mysql+pymysql://{os.getenv('DB_USER')}
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 
 # Initialize Database
-db.init_app(app)
+db = SQLAlchemy(app)
 
 # Initialize Flask-Migrate
 migrate = Migrate(app, db)
@@ -25,6 +24,18 @@ migrate = Migrate(app, db)
 # Enable CORS
 CORS(app, resources={r"/api/*": {"origins": "*"}}, supports_credentials=True)
 
+# Define the Flashcard model
+class Flashcard(db.Model):
+    id = db.Column(db.Integer, primary_key=True)
+    category = db.Column(db.String(100), nullable=False)
+    title = db.Column(db.String(200), nullable=False)
+    description = db.Column(db.Text, nullable=False)
+    mastered = db.Column(db.Boolean, default=False)
+
+    def __repr__(self):
+        return f'<Flashcard {self.title}>'
+
+# Routes
 @app.route('/api/flashcards', methods=['GET'])
 def get_flashcards():
     flashcards = Flashcard.query.all()
@@ -58,5 +69,6 @@ def delete_flashcard(card_id):
     db.session.commit()
     return jsonify({'message': 'Flashcard deleted'}), 200
 
+# Run the Flask app
 if __name__ == '__main__':
     app.run(debug=True, port=5000)
